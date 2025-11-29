@@ -7,7 +7,7 @@ class Neuron:
         self.bias: int = bias
 
     def feed(self, neuron_inputs: np.ndarray[int]) -> int:
-        print(self.weights, neuron_inputs)
+        # print(self.weights, neuron_inputs)
         dot_product: np.ndarray[int] = np.dot(self.weights, neuron_inputs)
         total: int = dot_product + self.bias
         # output: int = helpers.sigmoid(total)

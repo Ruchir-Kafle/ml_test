@@ -88,7 +88,7 @@ class NeuralNetwork:
                 for sample in network_inputs:
                     input_actuals.append(sample[2])
 
-                    [*_, output] = self.feedforward(sample)
+                    [*_, output] = self.feedforward(np.array([sample[0], sample[1]]))
                     network_predictions.append(helpers.sigmoid(output))
                 
                 loss: list[int] = helpers.mse(np.array(input_actuals), np.array(network_predictions))
@@ -106,6 +106,12 @@ print(dataset)
 my_neural_network: NeuralNetwork = NeuralNetwork()
 my_neural_network.train(dataset)
 
+# Predict
 
-# feedforward_output: int = my_neural_network.feedforward()
-# print(feedforward_output)
+emily = np.array([-7, -3]) # 128 pounds, 63 inches
+frank = np.array([20, 2])  # 155 pounds, 68 inches
+*_, emily_prediction = my_neural_network.feedforward(emily)
+*_, frank_prediction = my_neural_network.feedforward(frank)
+print(helpers.sigmoid(emily_prediction)) # 0.951 - F
+print(helpers.sigmoid(frank_prediction)) # 0.039 - M
+
